@@ -189,7 +189,7 @@ section + section { border-top: 1px solid var(--line) !important; }
 h2 { font-size: clamp(1.375rem, 1.9vw, 1.75rem) !important; line-height: 1.4 !important; }
 
 /* การ์ดไฟล์ / การ์ดลิงก์ */
-.file:not(pre), .start, .seg, .opt, .status, .check, .faq details, .rules > *, .fit > div {
+.file:not(pre), .start, .seg, .opt, .check, .faq details, .rules > *, .fit > div {
   border: 1px solid var(--line) !important;
   border-radius: var(--radius) !important;
   background: var(--surface) !important;
@@ -301,3 +301,16 @@ footer { color: var(--muted) !important; }
 .theme-toggle.floating { position: fixed; right: 1rem; bottom: 1rem; z-index: 10; box-shadow: 0 6px 20px -10px rgba(0,0,0,.4); }
 @media (max-width: 40rem) { .theme-toggle span { display: none; } .theme-toggle { padding: .35rem .65rem; } }
 @media print { .theme-toggle { display: none !important; } }
+
+/* ---------- แก้รอบ 2: ไอคอนปุ่มโหมดมืดไม่ขยายตาม svg ของหน้า / กล่องมีขอบต้องมีระยะใน ---------- */
+.theme-toggle { white-space: nowrap; flex-shrink: 0; }
+.theme-toggle svg { width: 18px !important; height: 18px !important; display: inline-block !important; }
+.theme-toggle span { font-size: .875rem !important; }
+.fit > div, .hub-page .fit div, .four div, .lesson div, .think div, .rules > * {
+  padding: .875rem 1.125rem !important;
+}
+.fit ul, .four ul, .lesson ul, .think ul { padding-left: 1.25rem !important; }
+.status { white-space: nowrap; }
+.status a { text-decoration: none; font-weight: 600; }
+ul.check, .check { padding: .875rem 1.125rem .875rem 1.25rem !important; }
+.ui { -webkit-box-decoration-break: clone; box-decoration-break: clone; }
