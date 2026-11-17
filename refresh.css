@@ -1,0 +1,303 @@
+/* Audit with AI · ui-refresh v19
+   ฟอนต์ Anuphan (ไทย, ไม่มีหัว อ่านง่าย) + Poppins (อังกฤษ) จาก Google Fonts
+   พื้นขาว ตัวอักษรเข้ม หัวเรื่องเป็นการ์ดไล่สีส้ม เมนูหน้าปัจจุบันเป็นแถบเข้ม
+   ไฟล์นี้โหลดหลัง style ของทุกหน้า จึงทับค่าเดิมได้โดยไม่ต้องแก้โครงหน้า */
+
+:root {
+  color-scheme: light;
+  --font: "Poppins", "Anuphan", "Leelawadee UI", system-ui, sans-serif;
+  --paper: #ffffff;
+  --surface: #ffffff;
+  --card: #ffffff;
+  --ink: #141414;
+  --muted: #4a4a4a;
+  --sec: #4a4a4a;
+  --line: #e7e5e1;
+  --edge: #d9d6d0;
+  --orange: #c2410c;
+  --orange-bright: #ea6a2e;
+  --soft: #fff1e8;
+  --tint: #faf8f5;
+  --code: #fbf7f2;
+  --code-line: #f0e4d8;
+  --lime: #e4f5a3;
+  --group-label: transparent;
+  --hero-bg: linear-gradient(135deg, #f8dccb 0%, #fbe9dd 50%, #fdf4ec 100%);
+  --hero-line: #f1d3c0;
+  --hero-ink: #2a1d16;
+  --hero-title: #a63a1c;
+  --hero-text: #4a3a31;
+  --hero-chip: rgba(255, 255, 255, .7);
+  --hero-chip-ink: #6b3a24;
+  --radius: 1rem;
+  --radius-lg: 1.5rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --paper: #141414;
+    --surface: #1d1d1d;
+    --card: #1d1d1d;
+    --ink: #f2f2f2;
+    --muted: #bdbdbd;
+    --sec: #bdbdbd;
+    --line: #2f2f2f;
+    --edge: #3a3a3a;
+    --orange: #ff9a6b;
+    --soft: #33231b;
+    --tint: #1a1a1a;
+    --code: #1f1b18;
+    --code-line: #3a2c22;
+    --lime: #4a5a1c;
+    --hero-bg: linear-gradient(135deg, #3b2a21 0%, #2f241e 55%, #261f1b 100%);
+    --hero-line: #4a3529;
+    --hero-ink: #f5ece5;
+    --hero-title: #ffb08a;
+    --hero-text: #e2d4ca;
+    --hero-chip: rgba(255, 255, 255, .08);
+    --hero-chip-ink: #f3c9b2;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #141414; --surface: #1d1d1d; --card: #1d1d1d; --ink: #f2f2f2;
+  --muted: #bdbdbd; --sec: #bdbdbd; --line: #2f2f2f; --edge: #3a3a3a;
+  --orange: #ff9a6b; --soft: #33231b; --tint: #1a1a1a; --code: #1f1b18; --code-line: #3a2c22;
+  --hero-bg: linear-gradient(135deg, #3b2a21 0%, #2f241e 55%, #261f1b 100%);
+  --hero-line: #4a3529; --hero-ink: #f5ece5; --hero-title: #ffb08a; --hero-text: #e2d4ca;
+  --hero-chip: rgba(255, 255, 255, .08); --hero-chip-ink: #f3c9b2;
+}
+
+/* ---------- ตัวอักษร ---------- */
+html, body { background: var(--paper); }
+body {
+  font-family: var(--font) !important;
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+body :is(h1, h2, h3, h4, p, li, td, th, summary, label, button, input, select, textarea, a, span, b, strong, small, time, code, kbd) {
+  font-family: var(--font) !important;
+}
+/* โค้ดและพาธยังเป็นตัวพิมพ์ดีด อ่านง่ายกว่าสำหรับชื่อไฟล์ */
+body :is(pre, pre *, .path, .url, kbd) { font-family: ui-monospace, "Cascadia Mono", Consolas, "Anuphan", monospace !important; }
+h1, h2, h3, h4 { color: var(--ink); }
+h2 { font-weight: 700 !important; letter-spacing: -0.01em; }
+h3 { font-weight: 600 !important; }
+b, strong { font-weight: 600; }
+p, li { text-wrap: pretty; }
+.lead, .intro, .note { color: var(--muted) !important; }
+a { color: var(--orange); }
+
+/* ---------- แถบบน ---------- */
+.masthead { background: color-mix(in srgb, var(--paper) 92%, transparent) !important; backdrop-filter: saturate(1.4) blur(10px); border-bottom: 1px solid var(--line) !important; }
+.brand { color: var(--orange) !important; font-weight: 800 !important; letter-spacing: .02em; text-transform: uppercase; font-size: 1.125rem !important; }
+.brand span { color: var(--ink) !important; font-size: .6875rem !important; font-weight: 600 !important; letter-spacing: .12em; text-transform: uppercase; margin-top: .35rem !important; }
+.menu-toggle { border-radius: 999px !important; background: var(--surface) !important; }
+
+/* ---------- เมนูซ้าย ---------- */
+.sidebar { border-right: 1px solid var(--line) !important; }
+.sidebar h2 {
+  background: none !important;
+  color: var(--ink) !important;
+  font-size: .75rem !important;
+  font-weight: 700 !important;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin: 1.5rem 0 .25rem !important;
+  padding: .25rem .875rem !important;
+  gap: .5rem !important;
+}
+.sidebar h2::before { content: ""; width: .5rem; height: .5rem; border-radius: 50%; background: var(--orange-bright); flex: none; }
+.sidebar h2::after { display: none !important; }
+.sidebar ul li + li { margin-top: .125rem; }
+.sidebar a {
+  font-size: .9375rem !important;
+  line-height: 1.5 !important;
+  border-radius: .625rem !important;
+  color: var(--ink) !important;
+  transition: background-color .15s ease;
+}
+.sidebar a:hover { background: var(--tint) !important; }
+.sidebar a[aria-current] {
+  background: var(--ink) !important;
+  color: var(--paper) !important;
+  font-weight: 600 !important;
+  box-shadow: none !important;
+}
+
+/* ---------- หัวเรื่อง: การ์ดไล่สี ---------- */
+.hub-page > header.hero,
+main > .hero {
+  background: var(--hero-bg) !important;
+  color: var(--hero-ink) !important;
+  border: 1px solid var(--hero-line) !important;
+  border-radius: var(--radius-lg);
+  margin: clamp(1rem, 2.2vw, 2rem) var(--content-inset, clamp(1rem, 3vw, 3rem)) 0 !important;
+  box-shadow: 0 14px 32px -26px rgba(120, 60, 30, .45);
+  overflow: hidden;
+}
+main > .hero { padding: clamp(1.75rem, 3.5vw, 3.5rem) clamp(1.5rem, 3.5vw, 3.5rem) !important; margin-inline: 0 !important; }
+.hub-page > header.hero .wrap { padding: clamp(1.75rem, 3.5vw, 3.5rem) clamp(1.5rem, 3.5vw, 3.5rem) !important; }
+.hero h1, .hub-page .hero h1 {
+  color: var(--hero-title) !important;
+  font-weight: 800 !important;
+  font-size: clamp(2.25rem, 4.6vw, 4.25rem) !important;
+  line-height: 1.12 !important;
+  letter-spacing: -0.02em !important;
+}
+.hero :is(p, .kicker, .tagline, .intro, .sub, li), .hero .meta { color: var(--hero-text) !important; }
+.hero .kicker {
+  display: inline-block;
+  font-size: .8125rem !important;
+  font-weight: 600 !important;
+  letter-spacing: .04em;
+  background: var(--hero-chip);
+  color: var(--hero-chip-ink) !important;
+  border-radius: 999px;
+  padding: .2rem .75rem;
+  margin-bottom: .875rem !important;
+}
+.hero .tagline { color: var(--hero-ink) !important; font-weight: 600 !important; }
+.hero a { color: var(--hero-title) !important; }
+.hero .meta { gap: .5rem !important; margin-top: 1.25rem !important; }
+.hero .meta span {
+  border: 0 !important;
+  background: var(--hero-chip);
+  color: var(--hero-chip-ink);
+  border-radius: 999px;
+  padding: .25rem .875rem !important;
+  font-size: .875rem;
+  font-weight: 500;
+}
+.hero .go, .hero .btn { background: var(--ink) !important; color: var(--paper) !important; border-color: var(--ink) !important; }
+
+/* หน้าเดี่ยวที่ไม่มีเมนูซ้าย (เช่น โปรแกรมหลังคลาส) */
+body > header.hero { background: var(--hero-bg) !important; color: var(--hero-ink) !important; border: 0 !important; border-bottom: 1px solid var(--hero-line) !important; }
+.topnav { background: color-mix(in srgb, var(--paper) 92%, transparent) !important; backdrop-filter: blur(8px); border-bottom: 1px solid var(--line) !important; }
+.topnav a { color: var(--ink) !important; font-weight: 500; text-decoration: none; border-radius: 999px; padding: .2rem .6rem; margin-inline: -.35rem; white-space: nowrap; }
+.topnav a:hover { background: var(--tint); }
+.topnav a[aria-current] { background: var(--ink); color: var(--paper) !important; }
+
+/* ---------- ส่วนเนื้อหา ---------- */
+.hub-page > main, main { padding-top: .5rem; }
+.hub-page > header.hero + main { padding-top: 1.5rem !important; }
+section { border-top: 0 !important; }
+section + section { border-top: 1px solid var(--line) !important; }
+h2 { font-size: clamp(1.375rem, 1.9vw, 1.75rem) !important; line-height: 1.4 !important; }
+
+/* การ์ดไฟล์ / การ์ดลิงก์ */
+.file:not(pre), .start, .seg, .opt, .status, .check, .faq details, .rules > *, .fit > div {
+  border: 1px solid var(--line) !important;
+  border-radius: var(--radius) !important;
+  background: var(--surface) !important;
+}
+.file:not(pre), .start { padding: 1.125rem 1.375rem !important; transition: border-color .15s ease, box-shadow .15s ease; }
+.file:not(pre):hover, .start:hover { border-color: var(--edge) !important; box-shadow: 0 6px 20px -14px rgba(0, 0, 0, .35); }
+
+/* ปุ่ม */
+.btn, .go, button.primary, .primary {
+  border-radius: 999px !important;
+  font-weight: 600 !important;
+  padding: .5rem 1.25rem !important;
+  background: var(--ink) !important;
+  border-color: var(--ink) !important;
+  color: var(--paper) !important;
+  transition: background-color .15s ease, transform .15s ease;
+}
+.btn:hover, .go:hover, .primary:hover { background: var(--orange) !important; border-color: var(--orange) !important; text-decoration: none !important; }
+
+/* กล่องคำสั่งให้ AI */
+.cmd {
+  border: 1px solid var(--code-line) !important;
+  border-radius: .875rem !important;
+  background: var(--code) !important;
+}
+.cmd code { font-size: .9375rem !important; line-height: 1.85 !important; padding: .875rem 1rem !important; color: var(--ink); }
+.cmd button, button.copy {
+  color: var(--orange) !important;
+  font-weight: 600 !important;
+  border-left: 1px solid var(--code-line) !important;
+}
+.cmd button:hover { background: var(--soft) !important; }
+pre { border-radius: .875rem !important; }
+
+/* แท็ก */
+.tag, .t-claude, .t-codex, .o-mac, .o-win {
+  border-radius: 999px !important;
+  font-weight: 600;
+}
+
+/* ขั้นตอน */
+.flow > li { border-top: 1px solid var(--line) !important; padding-block: 1.25rem !important; }
+.flow time {
+  color: var(--orange) !important;
+  font-weight: 600;
+  font-size: .875rem !important;
+}
+.step { border-color: var(--line) !important; }
+
+/* details / summary */
+details > summary { color: var(--orange) !important; font-weight: 600 !important; }
+details[open] > summary { margin-bottom: .25rem; }
+
+/* การ์ด 4 ช่อง / บทเรียน */
+.four div, .lesson div, .think div {
+  border: 1px solid var(--line) !important;
+  border-radius: var(--radius) !important;
+  background: var(--tint);
+  padding: .875rem 1rem !important;
+}
+
+/* ตาราง */
+table { font-size: .9375rem !important; }
+th { color: var(--muted) !important; font-weight: 600 !important; background: var(--tint); }
+th, td { border-bottom: 1px solid var(--line) !important; }
+.tablewrap { border: 1px solid var(--line); border-radius: var(--radius); }
+.tablewrap table th:first-child, .tablewrap table td:first-child { padding-left: 1rem; }
+
+/* กล่องเตือน / หมายเหตุ */
+.warn { border-radius: var(--radius) !important; }
+
+/* ลิงก์ถัดไป */
+.next { border-top: 1px solid var(--line) !important; }
+.next a { font-weight: 600; text-decoration: none; }
+.next a:hover { text-decoration: underline; }
+
+/* ตัวเลือกด้านบนบางหน้า */
+.picker { background: color-mix(in srgb, var(--paper) 92%, transparent) !important; backdrop-filter: blur(8px); }
+.seg button[aria-pressed="true"] { background: var(--ink) !important; color: var(--paper) !important; }
+
+footer { color: var(--muted) !important; }
+
+@media (max-width: 40rem) {
+  body { font-size: 15.5px; }
+  .hub-page > header.hero, main > .hero { border-radius: var(--radius); margin-inline: 1rem !important; }
+  main > .hero { margin-inline: 0 !important; }
+  .hero h1, .hub-page .hero h1 { font-size: clamp(2rem, 9vw, 2.75rem) !important; }
+}
+
+@media print {
+  .hub-page > header.hero, main > .hero { background: none !important; box-shadow: none; margin: 0 !important; }
+  .hero h1, .hub-page .hero h1, .hero :is(p, .kicker, .tagline, .meta, .meta span) { color: #141414 !important; background: none !important; }
+}
+
+/* ---------- ปุ่มสลับโหมดมืด ---------- */
+.mast-tools { display: flex; align-items: center; gap: .5rem; }
+.theme-toggle {
+  display: inline-flex; align-items: center; gap: .4rem;
+  min-height: 2.5rem; padding: .35rem .9rem;
+  border: 1px solid var(--line); border-radius: 999px;
+  background: var(--surface); color: var(--ink);
+  font: inherit; font-size: .875rem !important; font-weight: 600; cursor: pointer;
+  transition: background-color .15s ease, border-color .15s ease;
+}
+.theme-toggle:hover { background: var(--tint); border-color: var(--edge); }
+.theme-toggle:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
+.theme-toggle svg { flex: none; }
+.theme-toggle.in-nav { margin-left: auto; min-height: 2rem; padding: .2rem .75rem; }
+.theme-toggle.floating { position: fixed; right: 1rem; bottom: 1rem; z-index: 10; box-shadow: 0 6px 20px -10px rgba(0,0,0,.4); }
+@media (max-width: 40rem) { .theme-toggle span { display: none; } .theme-toggle { padding: .35rem .65rem; } }
+@media print { .theme-toggle { display: none !important; } }
